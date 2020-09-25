@@ -54,11 +54,9 @@ public:
 	/// Returns the type of buffer (ex GL_ARRAY_BUFFER, GL_ARRAY_ELEMENT_BUFFER, etc...)
 	/// </summary>
 	GLenum GetType() const { return _type; }
-	/// <summary>
+ 
 	/// Returns the usage hint for this buffer (ex GL_STATIC_DRAW, GL_DYNAMIC_DRAW)
-	/// </summary>
 	GLenum GetUsage() const { return _usage; }
-	/// <summary>
 	/// Returns the underlying OpenGL handle that this class is wrapping around
 	/// </summary>
 	GLuint GetHandle() const { return _handle; }
