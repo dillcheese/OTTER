@@ -42,9 +42,7 @@ struct BufferAttribute
 		Slot(slot), Size(size), Type(type), Normalized(normalized), Stride(stride), Offset(offset) { }
 };
 
-/// <summary>
 /// The Vertex Array Object wraps around an OpenGL VAO and basically represents all of the data for a mesh
-/// </summary>
 class VertexArrayObject final
 {
 public:
@@ -56,32 +54,22 @@ public:
 	VertexArrayObject& operator=(VertexArrayObject&& other) = delete;
 	
 public:
-	/// <summary>
 	/// Creates a new empty Vertex Array Object
-	/// </summary>
 	VertexArrayObject();
 	// Destructor does not need to be virtual due to the use of the final keyword
 	~VertexArrayObject();
 
-	/// <summary>
 	/// Sets the index buffer for this VAO, note that for now, this will not delete the buffer when the VAO is deleted, more on that later
-	/// </summary>
 	/// <param name="ibo">The index buffer to bind to this VAO</param>
 	void SetIndexBuffer(IndexBuffer* ibo);
-	/// <summary>
 	/// Adds a vertex buffer to this VAO, with the specified attributes
-	/// </summary>
 	/// <param name="buffer">The buffer to add (note, does not take ownership, you will still need to delete later)</param>
 	/// <param name="attributes">A list of vertex attributes that will be fed by this buffer</param>
 	void AddVertexBuffer(VertexBuffer* buffer, const std::vector<BufferAttribute>& attributes);
 
-	/// <summary>
 	/// Binds this VAO as the source of data for draw operations
-	/// </summary>
 	void Bind();
-	/// <summary>
 	/// Unbinds the currently bound VAO
-	/// </summary>
 	static void UnBind();
 
 	/// <summary>
