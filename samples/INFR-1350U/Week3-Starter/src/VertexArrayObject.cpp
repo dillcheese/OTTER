@@ -41,8 +41,7 @@ void VertexArrayObject::AddVertexBuffer(VertexBuffer* buffer, const std::vector<
 	buffer->Bind();
 	for (const BufferAttribute& attrib : attributes) {
 		glEnableVertexArrayAttrib(_handle, attrib.Slot);
-		glVertexAttribPointer(attrib.Slot, attrib.Size, attrib.Type, attrib.Normalized, attrib.Stride,
-			(void*)attrib.Offset);
+		glVertexAttribPointer(attrib.Slot, attrib.Size, attrib.Type, attrib.Normalized, attrib.Stride, (void*)attrib.Offset);
 	}
 	UnBind();
 
