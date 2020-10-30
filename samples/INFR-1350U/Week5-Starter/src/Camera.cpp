@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include <iostream>
 #include <GLM/gtc/matrix_transform.hpp>
 
 Camera::Camera() :
@@ -59,6 +60,22 @@ const glm::mat4& Camera::GetViewProjection() const {
 	}
 	return _viewProjection;
 }
+
+void Camera::Change(bool proj) {
+	if (proj == true) {
+		_projection = glm::perspective(_fovRadians, _aspectRatio, _nearPlane, _farPlane);
+		_isDirty = true;
+		std::cout << " PRESPECTIVE" << std::endl;
+	}
+
+	else {
+		_projection = glm::ortho(-5.0f, 2.0f, 2.0f, -5.0f, 0.0f, 1000.0f);
+		__CalculateView();
+		_isDirty = true;
+		std::cout << "ORTHO  " << std::endl;
+	}
+}
+
 
 void Camera::__CalculateProjection() {
 	_projection = glm::perspective(_fovRadians, _aspectRatio, _nearPlane, _farPlane);

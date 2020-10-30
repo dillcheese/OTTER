@@ -77,6 +77,7 @@ public:
 	/// Gets the combined view-projection matrix for this camera, calculating if needed
 	/// </summary>
 	const glm::mat4& GetViewProjection() const;
+	void Change(bool p);
 
 protected:
 	float _nearPlane;

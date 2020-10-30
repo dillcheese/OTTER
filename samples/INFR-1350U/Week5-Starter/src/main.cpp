@@ -25,6 +25,7 @@
 #include "MeshFactory.h"
 #include "NotObjLoader.h"
 #include "VertexTypes.h"
+#include "OBJLoader.h"
 
 #define LOG_GL_NOTIFICATIONS
 
@@ -62,6 +63,7 @@ void GlDebugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsi
 
 GLFWwindow* window;
 Camera::sptr camera = nullptr;
+bool cam = true;
 
 void GlfwWindowResizedCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
@@ -198,20 +200,20 @@ int main() {
 		0.0f, 0.0f, 1.0f
 	};
 
-	//VBO - Vertex buffer object
-	VertexBuffer::sptr posVbo = VertexBuffer::Create();
-	posVbo->LoadData(points, 9);
+	////VBO - Vertex buffer object
+	//VertexBuffer::sptr posVbo = VertexBuffer::Create();
+	//posVbo->LoadData(points, 9);
 
-	VertexBuffer::sptr color_vbo = VertexBuffer::Create();
-	color_vbo->LoadData(colors, 9);
+	//VertexBuffer::sptr color_vbo = VertexBuffer::Create();
+	//color_vbo->LoadData(colors, 9);
 
-	VertexArrayObject::sptr vao = VertexArrayObject::Create();
-	vao->AddVertexBuffer(posVbo, {
-		BufferAttribute(0, 3, GL_FLOAT, false, 0, NULL)
-	});
-	vao->AddVertexBuffer(color_vbo, {
-		BufferAttribute(1, 3, GL_FLOAT, false, 0, NULL)
-	});
+	//VertexArrayObject::sptr vao = VertexArrayObject::Create();
+	//vao->AddVertexBuffer(posVbo, {
+	//	BufferAttribute(0, 3, GL_FLOAT, false, 0, NULL)
+	//});
+	//vao->AddVertexBuffer(color_vbo, {
+	//	BufferAttribute(1, 3, GL_FLOAT, false, 0, NULL)
+	//});
 
 	static const VertexPosCol interleaved[] = {
     //     X      Y     Z       R     G    B
@@ -232,33 +234,34 @@ int main() {
 	interleaved_ibo->LoadData(indices, 3 * 2);
 
 	size_t stride = sizeof(VertexPosCol);
-	VertexArrayObject::sptr vao2 = VertexArrayObject::Create();
-	vao2->AddVertexBuffer(interleaved_vbo, VertexPosCol::V_DECL);
-	vao2->SetIndexBuffer(interleaved_ibo);
+	//VertexArrayObject::sptr vao2 = VertexArrayObject::Create();
+	//vao2->AddVertexBuffer(interleaved_vbo, VertexPosCol::V_DECL);
+	//svao2->SetIndexBuffer(interleaved_ibo);
 
 	////////////// NEW STUFF
 	
 	// We'll use the provided mesh builder to build a new mesh with a few elements
-	MeshBuilder<VertexPosNormTexCol> builder = MeshBuilder<VertexPosNormTexCol>();
-	MeshFactory::AddPlane(builder, glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0, 0.0f), glm::vec2(100.0f, 100.0f), glm::vec4(1.0f));
-	MeshFactory::AddCube(builder, glm::vec3(-2.0f, 0.0f, 0.5f), glm::vec3(1.0f, 2.0f, 1.0f), glm::vec3(0.0f, 0.0f, 45.0f), glm::vec4(1.0f, 0.5f, 0.5f, 1.0f));
-	MeshFactory::AddIcoSphere(builder, glm::vec3(0.0f, 0.f, 1.0f), 0.5f, 2, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-	MeshFactory::AddUvSphere(builder, glm::vec3(1.0f, 0.f, 1.0f), 0.5f, 2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	VertexArrayObject::sptr vao3 = builder.Bake();
+	//MeshBuilder<VertexPosNormTexCol> builder = MeshBuilder<VertexPosNormTexCol>();
+	//MeshFactory::AddPlane(builder, glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0, 0.0f), glm::vec2(100.0f, 100.0f), glm::vec4(1.0f));
+	//MeshFactory::AddCube(builder, glm::vec3(-2.0f, 0.0f, 0.5f), glm::vec3(1.0f, 2.0f, 1.0f), glm::vec3(0.0f, 0.0f, 45.0f), glm::vec4(1.0f, 0.5f, 0.5f, 1.0f));
+	//MeshFactory::AddIcoSphere(builder, glm::vec3(0.0f, 0.f, 1.0f), 0.5f, 2, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	//MeshFactory::AddUvSphere(builder, glm::vec3(1.0f, 0.f, 1.0f), 0.5f, 2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	//VertexArrayObject::sptr vao3 = builder.Bake();
 
 	// We'll be implementing a loader that works a bit like an OBJ loader to learn how to read files, we'll
 	// load an exact copy of the mesh created above
-	VertexArrayObject::sptr vao4 = NotObjLoader::LoadFromFile("Sample.notobj");
-	
+	VertexArrayObject::sptr vao4 = OBJLoader::LoadFile("monkey.obj");
+
+
 	// Load our shaders
 	Shader::sptr shader = Shader::Create();
 	shader->LoadShaderPartFromFile("shaders/vertex_shader.glsl", GL_VERTEX_SHADER);
 	shader->LoadShaderPartFromFile("shaders/frag_blinn_phong.glsl", GL_FRAGMENT_SHADER);  
 	shader->Link();  
 
-	glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 2.0f);
-	glm::vec3 lightCol = glm::vec3(0.3f, 0.2f, 0.5f);
-	float     lightAmbientPow = 0.05f;
+	glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 1.0f);
+	glm::vec3 lightCol = glm::vec3(0.1f, 0.4f, 0.2f);
+	float     lightAmbientPow = 0.25f;
 	float     lightSpecularPow = 1.0f;
 	glm::vec3 ambientCol = glm::vec3(1.0f);
 	float     ambientPow = 0.1f;
@@ -311,9 +314,11 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
-	glm::mat4 transform = glm::mat4(1.0f);
-	glm::mat4 transform2 = glm::mat4(1.0f);
-	glm::mat4 transform3 = glm::mat4(1.0f);
+	/*glm::mat4 transform = glm::mat4(1.0f);
+	glm::mat4 transform2 = glm::mat4(1.0f);*/
+	glm::mat4 transform3 = glm::mat4(0.0f);
+	glm::mat4 transform4 = glm::mat4(10.0f);
+
 
 	camera = Camera::Create();
 	camera->SetPosition(glm::vec3(0, 3, 3)); // Set initial position
@@ -335,7 +340,7 @@ int main() {
 		
 	// Our high-precision timer
 	double lastFrame = glfwGetTime();
-	
+
 	///// Game loop /////
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -347,22 +352,36 @@ int main() {
 		// We need to poll our key watchers so they can do their logic with the GLFW state
 		tKeyWatcher.Poll(window);
 
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+	/*	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 			transform3 = glm::translate(transform3, glm::vec3( 1.0f * dt, 0.0f, 0.0f));
 		}
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-			transform3 = glm::translate(transform3, glm::vec3(-1.0f * dt, 0.0f, 0.0f));
+			transform3 = glm::translate(transform3, glm::vec3(-1.0f * dt*10.f, 0.0f, 0.0f));
 		}
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 			transform3 = glm::translate(transform3, glm::vec3(0.0f, -1.0f * dt, 0.0f));
 		}
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 			transform3 = glm::translate(transform3, glm::vec3(0.0f,  1.0f * dt, 0.0f));
-		}
+		}*/
 				
-		transform = glm::rotate(glm::mat4(1.0f), static_cast<float>(thisFrame), glm::vec3(0, 1, 0));
-		transform2 = transform * glm::translate(glm::mat4(1.0f), glm::vec3(0, 0.0f, glm::sin(static_cast<float>(thisFrame))));
+		if ((glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) && (cam)) {
+			camera->Change(cam);
+			cam = false;
+		}
+		else if ((glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) && !(cam)) {
+			camera->Change(cam);
+			cam = true;
+		}
+
+		//transform = glm::rotate(glm::mat4(1.0f), static_cast<float>(thisFrame), glm::vec3(0, 1, 0));
+		//transform2 = transform * glm::translate(glm::mat4(1.0f), glm::vec3(0, 0.0f, glm::sin(static_cast<float>(thisFrame))));
+		transform3 = glm::rotate(glm::mat4(1.0f), static_cast<float>(thisFrame), glm::vec3(0, 1, 0));
+		transform4 = glm::rotate(glm::mat4(100.0f), static_cast<float>(thisFrame), glm::vec3(5, 0, 6));
 		
+
+	//transform4 = glm::mat4(500.f);
+
 		glClearColor(0.08f, 0.17f, 0.31f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -372,20 +391,15 @@ int main() {
 		shader->SetUniform("u_CamPos", camera->GetPosition());
 
 		// These uniforms update for every object we want to draw
-		shader->SetUniformMatrix("u_ModelViewProjection", camera->GetViewProjection() * transform);
-		shader->SetUniformMatrix("u_Model", transform);
-		shader->SetUniformMatrix("u_ModelRotation", glm::mat3(transform));
-		vao->Render();
-
-		shader->SetUniformMatrix("u_ModelViewProjection", camera->GetViewProjection()* transform2);
-		shader->SetUniformMatrix("u_Model", transform2);
-		shader->SetUniformMatrix("u_ModelRotation", glm::mat3(transform2));
-		vao2->Render();
-
-		shader->SetUniformMatrix("u_ModelViewProjection", camera->GetViewProjection() * transform3);
+		shader->SetUniformMatrix("u_ModelViewProjection", camera->GetViewProjection()* transform3);
 		shader->SetUniformMatrix("u_Model", transform3);
 		shader->SetUniformMatrix("u_ModelRotation", glm::mat3(transform3));
-		vao3->Render();
+		vao4->Render();
+
+		shader->SetUniformMatrix("u_ModelViewProjection", camera->GetViewProjection()* transform4);
+		shader->SetUniformMatrix("u_Model", transform4);
+		shader->SetUniformMatrix("u_ModelRotation", glm::mat3(transform4));
+		vao4->Render();
 
 		RenderImGui();
 

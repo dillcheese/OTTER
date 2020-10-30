@@ -80,7 +80,6 @@ bool initGLAD() {
 	}
 }
 
-
 GLuint shader_program;
 
 bool loadShaders() {

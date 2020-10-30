@@ -9,6 +9,7 @@ class VertexBuffer : public IBuffer
 {
 public:
 	typedef std::shared_ptr<VertexBuffer> sptr;
+
 	static inline sptr Create(GLenum usage = GL_STATIC_DRAW) {
 		return std::make_shared<VertexBuffer>(usage);
 	}
