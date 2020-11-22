@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <bullet/btBulletDynamicsCommon.h>
 
 #include <filesystem>
 #include <json.hpp>
@@ -96,7 +97,7 @@ bool initGLFW() {
 #endif
 	
 	//Create a new GLFW window
-	window = glfwCreateWindow(800, 800, "INFR1350U", nullptr, nullptr);
+	window = glfwCreateWindow(800, 800, "100750922", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	// Set our window resized callback
@@ -333,10 +334,11 @@ int main() {
 		Texture2D::sptr diffuse = Texture2D::LoadFromFile("images/Stone_001_Diffuse.png");
 		Texture2D::sptr diffuse2 = Texture2D::LoadFromFile("images/box.bmp");
 		Texture2D::sptr specular = Texture2D::LoadFromFile("images/Stone_001_Specular.png"); 
+		Texture2D::sptr reflective = Texture2D::LoadFromFile("images/Stone_001_Normal.png");
 
 		// Load the cube map
-		TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/sample.jpg");
-		//TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/ocean.jpg"); 
+		//TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/sample.jpg");
+		TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/ocean.jpg"); 
 
 		// Creating an empty texture
 		Texture2DDescription desc = Texture2DDescription();
@@ -371,7 +373,7 @@ int main() {
 		material0->Set("s_Diffuse2", diffuse2);
 		material0->Set("s_Specular", specular);
 		material0->Set("u_Shininess", 8.0f);
-		material0->Set("u_TextureMix", 0.5f); 
+		material0->Set("u_TextureMix", 1.0f); 
 
 		// Load a second material for our reflective material!
 		Shader::sptr reflectiveShader = Shader::Create();
@@ -382,12 +384,18 @@ int main() {
 		ShaderMaterial::sptr reflectiveMat = ShaderMaterial::Create();
 		reflectiveMat->Shader = reflectiveShader;
 		reflectiveMat->Set("s_Environment", environmentMap);
+		reflectiveMat->Set("s_Reflectivity", reflective);
+		reflectiveMat->Set("u_TextureMix", 1.5f);
+
 		// TODO: send the rotation to apply to the skybox
+		reflectiveMat->Set("u_EnvironmentRotation", glm::mat3(glm::rotate(glm::mat4(1.0f), glm::radians(90.0f),
+			glm::vec3(1, 0, 0))));
+		
 
 		GameObject sceneObj = scene->CreateEntity("scene_geo");
 		{
 			VertexArrayObject::sptr sceneVao = NotObjLoader::LoadFromFile("Sample.notobj");
-			sceneObj.emplace<RendererComponent>().SetMesh(sceneVao).SetMaterial(material0);
+			sceneObj.emplace<RendererComponent>().SetMesh(sceneVao).SetMaterial(reflectiveMat);
 			sceneObj.get<Transform>().SetLocalPosition(0.0f, 0.0f, 0.0f);
 		}
 
@@ -407,7 +415,6 @@ int main() {
 			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj3);
 		}
 
-
 		GameObject obj5 = scene->CreateEntity("cube");
 		{
 			MeshBuilder<VertexPosNormTexCol> builder = MeshBuilder<VertexPosNormTexCol>();
@@ -426,7 +433,7 @@ int main() {
 			MeshFactory::AddCube(builder, glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f), glm::vec4(1.0f, 0.5f, 0.5f, 1.0f));
 			VertexArrayObject::sptr vao = builder.Bake();
 			
-			obj4.emplace<RendererComponent>().SetMesh(vao).SetMaterial(material0);
+			obj4.emplace<RendererComponent>().SetMesh(vao).SetMaterial(reflectiveMat);
 			obj4.get<Transform>().SetLocalPosition(-2.0f, 0.0f, 1.0f);
 
 			// Bind returns a smart pointer to the behaviour that was added
@@ -470,6 +477,9 @@ int main() {
 			skyboxMat->Set("s_Environment", environmentMap);
 			// TODO: send the rotation to apply to the skybox
 			skyboxMat->RenderLayer = 100;
+			skyboxMat->Set("u_EnvironmentRotation", glm::mat3(glm::rotate(glm::mat4(1.0f), glm::radians(90.0f),
+				glm::vec3(1, 0, 0))));
+
 
 			MeshBuilder<VertexPosNormTexCol> mesh;
 			MeshFactory::AddIcoSphere(mesh, glm::vec3(0.0f), 1.0f);
@@ -579,7 +589,7 @@ int main() {
 				// Sort by shader pointer next (so materials using the same shader run sequentially where possible)
 				if (l.Material->Shader < r.Material->Shader) return true;
 				if (l.Material->Shader > r.Material->Shader) return false;
-
+				
 				// Sort by material pointer last (so we can minimize switching between materials)
 				if (l.Material < r.Material) return true;
 				if (l.Material > r.Material) return false;

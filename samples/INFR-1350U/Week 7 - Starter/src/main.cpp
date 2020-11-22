@@ -410,25 +410,25 @@ int main() {
 	materials[0].Albedo = diffuse;
 	materials[0].Specular = specular;
 	materials[0].Third = third;
-	materials[0].TexMix = 4.0f;
+	materials[0].TexMix = 1.0f;
 	materials[0].Shininess = 4.0f;
 
 	materials[1].Albedo = diffuse;
 	materials[1].Specular = specular;
 	materials[1].Third = third;
-	materials[0].TexMix = 4.0f;
+	materials[1].TexMix = 2.0f;
 	materials[1].Shininess = 16.0f;
 
 	materials[2].Albedo = diffuse;
 	materials[2].Specular = specular;
 	materials[2].Third = third;
-	materials[0].TexMix = 4.0f;
+	materials[2].TexMix = 3.0f;
 	materials[2].Shininess = 32.0f;
 
 	materials[3].Albedo = diffuse;
 	materials[3].Specular = specular;
 	materials[3].Third = third;
-	materials[0].TexMix = 4.0f;
+	materials[3].TexMix = 4.0f;
 	materials[3].Shininess = 64.0f;
 	
 	camera = Camera::Create();
@@ -506,6 +506,8 @@ int main() {
 			materials[ix].Third->Bind(2);
 
 			shader->SetUniform("u_Shininess", materials[ix].Shininess);
+			shader->SetUniform("u_TexMix", (materials[ix].TexMix / 4.0f));
+
 			RenderVAO(shader, vaos[ix], camera, transforms[ix]);
 		}
 		
