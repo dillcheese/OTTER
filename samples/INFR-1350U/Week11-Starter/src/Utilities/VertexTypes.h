@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 #include <GLM/glm.hpp>
@@ -58,7 +58,7 @@ struct VertexPosNormTexCol {
 		Position({ x, y, z }), Normal({ nX, nY, nZ }), UV({ u, v }), Color({r, g, b, a}) {}
 
 	static const std::vector<BufferAttribute> V_DECL;
-=======
+ 
 #pragma once
 
 #include <GLM/glm.hpp>
@@ -118,5 +118,5 @@ struct VertexPosNormTexCol {
 		Position({ x, y, z }), Normal({ nX, nY, nZ }), UV({ u, v }), Color({r, g, b, a}) {}
 
 	static const std::vector<BufferAttribute> V_DECL;
->>>>>>> master
+ 
 };

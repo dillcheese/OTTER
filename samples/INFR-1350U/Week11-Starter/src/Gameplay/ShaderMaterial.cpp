@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "ShaderMaterial.h"
 
 template<typename T>
@@ -91,7 +91,7 @@ void ShaderMaterial::Set(const std::string& name, const glm::mat3& value) {
 	pName.Location = Shader->GetUniformLocation(name);
 	Mat3Params[pName] = value;
 }
-=======
+ 
 #include "ShaderMaterial.h"
 
 template<typename T>
@@ -184,4 +184,4 @@ void ShaderMaterial::Set(const std::string& name, const glm::mat3& value) {
 	pName.Location = Shader->GetUniformLocation(name);
 	Mat3Params[pName] = value;
 }
->>>>>>> master
+ 

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "GLFW/glfw3.h"
 
@@ -17,7 +17,7 @@ public:
 	GLFWwindow* Window;
 	std::shared_ptr<GameScene> ActiveScene;
 };
-=======
+ 
 #pragma once
 #include "GLFW/glfw3.h"
 
@@ -36,4 +36,4 @@ public:
 	GLFWwindow* Window;
 	std::shared_ptr<GameScene> ActiveScene;
 };
->>>>>>> master
+ 

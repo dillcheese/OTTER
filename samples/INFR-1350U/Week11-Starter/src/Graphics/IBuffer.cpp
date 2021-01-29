@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "IBuffer.h"
 
 IBuffer::IBuffer(GLenum type, GLenum usage) :
@@ -32,7 +32,7 @@ void IBuffer::Bind() {
 void IBuffer::UnBind(GLenum type) {
 	glBindBuffer(type, 0);
 }
-=======
+ 
 #include "IBuffer.h"
 
 IBuffer::IBuffer(GLenum type, GLenum usage) :
@@ -66,4 +66,4 @@ void IBuffer::Bind() {
 void IBuffer::UnBind(GLenum type) {
 	glBindBuffer(type, 0);
 }
->>>>>>> master
+ 

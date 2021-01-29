@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include <Logging.h>
 #include <iostream>
 
@@ -689,7 +689,7 @@ int main() {
 		Logger::Uninitialize();
 		return 0;
 	}
-=======
+ 
 #include <Logging.h>
 #include <iostream>
 
@@ -1364,5 +1364,5 @@ int main() {
 	// Clean up the toolkit logger so we don't leak memory
 	Logger::Uninitialize();
 	return 0;
->>>>>>> master
+ 
 }

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <memory>
 #include <entt.hpp>
@@ -151,7 +151,7 @@ struct BehaviourBinding {
 		}
 		else return nullptr;
 	}
-=======
+ 
 #pragma once
 #include <memory>
 #include <entt.hpp>
@@ -304,5 +304,5 @@ struct BehaviourBinding {
 		}
 		else return nullptr;
 	}
->>>>>>> master
+ 
 };

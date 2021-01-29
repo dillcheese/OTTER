@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 class Timing
@@ -15,7 +15,7 @@ public:
 
 protected:
 	Timing() = default;
-=======
+ 
 #pragma once
 
 class Timing
@@ -32,5 +32,5 @@ public:
 
 protected:
 	Timing() = default;
->>>>>>> master
+ 
 };

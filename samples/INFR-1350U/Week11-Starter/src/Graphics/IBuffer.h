@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <glad/glad.h>
 
@@ -88,7 +88,7 @@ protected:
 	GLenum _usage; // The buffer usage mode (GL_STATIC_DRAW, GL_DYNAMIC_DRAW)
 	GLenum _type; // The buffer type (ex GL_ARRAY_BUFFER, GL_ARRAY_ELEMENT_BUFFER)
 };
-=======
+ 
 #pragma once
 #include <glad/glad.h>
 
@@ -178,4 +178,4 @@ protected:
 	GLenum _usage; // The buffer usage mode (GL_STATIC_DRAW, GL_DYNAMIC_DRAW)
 	GLenum _type; // The buffer type (ex GL_ARRAY_BUFFER, GL_ARRAY_ELEMENT_BUFFER)
 };
->>>>>>> master
+ 

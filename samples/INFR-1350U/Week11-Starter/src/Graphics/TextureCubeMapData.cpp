@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "TextureCubeMapData.h"
 #include <filesystem>
 
@@ -83,7 +83,7 @@ void TextureCubeMapData::LoadFaceData(const Texture2DData::sptr& data, CubeMapFa
 		LOG_WARN("Data for face {} was null, ignoring", face);
 	}
 }
-=======
+ 
 #include "TextureCubeMapData.h"
 #include <filesystem>
 
@@ -168,4 +168,4 @@ void TextureCubeMapData::LoadFaceData(const Texture2DData::sptr& data, CubeMapFa
 		LOG_WARN("Data for face {} was null, ignoring", face);
 	}
 }
->>>>>>> master
+ 

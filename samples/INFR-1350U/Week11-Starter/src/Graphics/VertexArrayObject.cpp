@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "VertexArrayObject.h"
 #include "IndexBuffer.h"
 #include "Logging.h"
@@ -71,7 +71,7 @@ void VertexArrayObject::Render() const {
 	}
 	UnBind();
 }
-=======
+ 
 #include "VertexArrayObject.h"
 #include "IndexBuffer.h"
 #include "Logging.h"
@@ -144,4 +144,4 @@ void VertexArrayObject::Render() const {
 	}
 	UnBind();
 }
->>>>>>> master
+ 

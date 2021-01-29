@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <cstdint>
 
@@ -68,7 +68,7 @@ private:
 
 	void _RecreateTexture();
 };
-=======
+ 
 #pragma once
 #include <cstdint>
 
@@ -138,4 +138,4 @@ private:
 
 	void _RecreateTexture();
 };
->>>>>>> master
+ 

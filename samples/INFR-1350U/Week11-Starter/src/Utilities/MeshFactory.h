@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
@@ -27,7 +27,7 @@ protected:
 	~MeshFactory() = default;
 
 	inline static const glm::mat4 MAT4_IDENTITY = glm::mat4(1.0f);
-=======
+ 
 #pragma once
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
@@ -56,5 +56,5 @@ protected:
 	~MeshFactory() = default;
 
 	inline static const glm::mat4 MAT4_IDENTITY = glm::mat4(1.0f);
->>>>>>> master
+ 
 };

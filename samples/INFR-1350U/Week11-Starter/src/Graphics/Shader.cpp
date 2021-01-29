@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "Shader.h"
 #include "Logging.h"
 #include <fstream>
@@ -194,7 +194,7 @@ int Shader::GetUniformLocation(const std::string& name) {
 	}
 
 	return result;
-=======
+ 
 #include "Shader.h"
 #include "Logging.h"
 #include <fstream>
@@ -390,5 +390,5 @@ int Shader::GetUniformLocation(const std::string& name) {
 	}
 
 	return result;
->>>>>>> master
+ 
 }

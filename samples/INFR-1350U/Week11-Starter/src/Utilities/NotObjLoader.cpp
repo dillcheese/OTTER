@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "NotObjLoader.h"
 
 #include <string>
@@ -111,7 +111,7 @@ VertexArrayObject::sptr NotObjLoader::LoadFromFile(const std::string& filename)
 
 	return mesh.Bake();
 }
-=======
+ 
 #include "NotObjLoader.h"
 
 #include <string>
@@ -224,4 +224,4 @@ VertexArrayObject::sptr NotObjLoader::LoadFromFile(const std::string& filename)
 
 	return mesh.Bake();
 }
->>>>>>> master
+ 

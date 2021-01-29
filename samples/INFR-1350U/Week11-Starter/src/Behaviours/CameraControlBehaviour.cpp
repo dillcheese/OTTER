@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "CameraControlBehaviour.h"
 
 #include "Gameplay/Application.h"
@@ -62,7 +62,7 @@ void CameraControlBehaviour::Update(entt::handle entity)
 	}
 	transform.MoveLocal(movement);
 }
-=======
+ 
 #include "CameraControlBehaviour.h"
 
 #include "Gameplay/Application.h"
@@ -126,4 +126,4 @@ void CameraControlBehaviour::Update(entt::handle entity)
 	}
 	transform.MoveLocal(movement);
 }
->>>>>>> master
+ 

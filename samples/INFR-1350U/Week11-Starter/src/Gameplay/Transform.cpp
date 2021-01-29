@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "Transform.h"
 
 #include <GLM/gtc/matrix_transform.hpp>
@@ -176,7 +176,7 @@ void Transform::_UpdateLocalTransformIfDirty() const {
 		_isLocalDirty = false;
 	}
 }
-=======
+ 
 #include "Transform.h"
 
 #include <GLM/gtc/matrix_transform.hpp>
@@ -354,4 +354,4 @@ void Transform::_UpdateLocalTransformIfDirty() const {
 		_isLocalDirty = false;
 	}
 }
->>>>>>> master
+ 

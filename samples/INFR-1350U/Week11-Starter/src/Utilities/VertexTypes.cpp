@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "VertexTypes.h"
 #pragma warning( push )
 
@@ -27,7 +27,7 @@ const std::vector<BufferAttribute> VertexPosNormTexCol::V_DECL = {
 	BufferAttribute(2, 3, GL_FLOAT, false, sizeof(VertexPosNormTexCol), (size_t)&VPNTC->Normal, AttribUsage::Normal),
 	BufferAttribute(3, 2, GL_FLOAT, false, sizeof(VertexPosNormTexCol), (size_t)&VPNTC->UV, AttribUsage::Texture),
 };
-=======
+ 
 #include "VertexTypes.h"
 #pragma warning( push )
 
@@ -56,5 +56,5 @@ const std::vector<BufferAttribute> VertexPosNormTexCol::V_DECL = {
 	BufferAttribute(2, 3, GL_FLOAT, false, sizeof(VertexPosNormTexCol), (size_t)&VPNTC->Normal, AttribUsage::Normal),
 	BufferAttribute(3, 2, GL_FLOAT, false, sizeof(VertexPosNormTexCol), (size_t)&VPNTC->UV, AttribUsage::Texture),
 };
->>>>>>> master
+ 
 #pragma warning(pop)

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "Scene.h"
 
 #include "Transform.h"
@@ -53,7 +53,7 @@ entt::handle GameScene::StampEntity(const entt::registry& from, entt::entity src
 	});
 	return entt::handle(to, dst);
 }
-=======
+ 
 #include "Scene.h"
 
 #include "Transform.h"
@@ -108,4 +108,4 @@ entt::handle GameScene::StampEntity(const entt::registry& from, entt::entity src
 	});
 	return entt::handle(to, dst);
 }
->>>>>>> master
+ 

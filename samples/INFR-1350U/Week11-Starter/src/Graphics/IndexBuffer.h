@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "IBuffer.h"
 #include <cstdint>
@@ -81,7 +81,7 @@ inline void IndexBuffer::LoadData<uint32_t>(const uint32_t* data, size_t count) 
 	IBuffer::LoadData<uint32_t>(data, count);
 	_elementType = GL_UNSIGNED_INT;
 }
-=======
+ 
 #pragma once
 #include "IBuffer.h"
 #include <cstdint>
@@ -164,4 +164,4 @@ inline void IndexBuffer::LoadData<uint32_t>(const uint32_t* data, size_t count) 
 	IBuffer::LoadData<uint32_t>(data, count);
 	_elementType = GL_UNSIGNED_INT;
 }
->>>>>>> master
+ 

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "IBuffer.h"
 #include <memory>
@@ -25,7 +25,7 @@ public:
 	/// Unbinds the current vertex buffer
 	/// </summary>
 	static void UnBind() { IBuffer::UnBind(GL_ARRAY_BUFFER); }
-=======
+ 
 #pragma once
 #include "IBuffer.h"
 #include <memory>
@@ -52,5 +52,5 @@ public:
 	/// Unbinds the current vertex buffer
 	/// </summary>
 	static void UnBind() { IBuffer::UnBind(GL_ARRAY_BUFFER); }
->>>>>>> master
+ 
 };

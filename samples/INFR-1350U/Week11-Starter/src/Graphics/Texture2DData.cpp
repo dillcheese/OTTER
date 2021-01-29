@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "Texture2DData.h"
 
 #include <filesystem>
@@ -82,7 +82,7 @@ Texture2DData::sptr Texture2DData::LoadFromFile(const std::string& file, bool fo
 
 	return result;
 }
-=======
+ 
 #include "Texture2DData.h"
 
 #include <filesystem>
@@ -166,4 +166,4 @@ Texture2DData::sptr Texture2DData::LoadFromFile(const std::string& file, bool fo
 
 	return result;
 }
->>>>>>> master
+ 

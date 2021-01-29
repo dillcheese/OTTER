@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <entt.hpp>
 #include <memory>
@@ -223,7 +223,7 @@ private:
 
 	void _UpdateLocalTransformIfDirty() const;
 };
-=======
+ 
 #pragma once
 #include <entt.hpp>
 #include <memory>
@@ -448,4 +448,4 @@ private:
 
 	void _UpdateLocalTransformIfDirty() const;
 };
->>>>>>> master
+ 

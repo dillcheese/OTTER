@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "FollowPathBehaviour.h"
 
 #include "Gameplay/Timing.h"
@@ -20,7 +20,7 @@ void FollowPathBehaviour::Update(entt::handle entity) {
 		}
 	}
 }
-=======
+ 
 #include "FollowPathBehaviour.h"
 
 #include "Gameplay/Timing.h"
@@ -42,4 +42,4 @@ void FollowPathBehaviour::Update(entt::handle entity) {
 		}
 	}
 }
->>>>>>> master
+ 

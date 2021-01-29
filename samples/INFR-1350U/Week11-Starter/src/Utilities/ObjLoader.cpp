@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "ObjLoader.h"
 
 #include <string>
@@ -128,7 +128,7 @@ VertexArrayObject::sptr ObjLoader::LoadFromFile(const std::string& filename, con
 
 	return mesh.Bake();
 }
-=======
+ 
 #include "ObjLoader.h"
 
 #include <string>
@@ -258,4 +258,4 @@ VertexArrayObject::sptr ObjLoader::LoadFromFile(const std::string& filename, con
 
 	return mesh.Bake();
 }
->>>>>>> master
+ 

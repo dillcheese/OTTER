@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "InputHelpers.h"
 #include <GLFW/glfw3.h>
 
@@ -22,7 +22,7 @@ bool KeyPressWatcher::Poll(GLFWwindow* window) const {
 	}
 	return false;
 }
-=======
+ 
 #include "InputHelpers.h"
 #include <GLFW/glfw3.h>
 
@@ -46,4 +46,4 @@ bool KeyPressWatcher::Poll(GLFWwindow* window) const {
 	}
 	return false;
 }
->>>>>>> master
+ 

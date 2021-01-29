@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "Texture2D.h"
 
 Texture2D::Texture2D(const Texture2DDescription& description) :
@@ -110,7 +110,7 @@ void Texture2D::SetAnisotropicFiltering(float level)
 		glTextureParameterf(_handle, GL_TEXTURE_MAX_ANISOTROPY, _description.MaxAnisotropic);
 	}
 }
-=======
+ 
 #include "Texture2D.h"
 
 Texture2D::Texture2D(const Texture2DDescription& description) :
@@ -222,4 +222,4 @@ void Texture2D::SetAnisotropicFiltering(float level)
 		glTextureParameterf(_handle, GL_TEXTURE_MAX_ANISOTROPY, _description.MaxAnisotropic);
 	}
 }
->>>>>>> master
+ 

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "SimpleMoveBehaviour.h"
 #include "Gameplay/Application.h"
 #include "Gameplay/Transform.h"
@@ -91,7 +91,7 @@ void SimpleMoveBehaviour::Update(entt::handle entity)
 		}
 	}
 }
-=======
+ 
 #include "SimpleMoveBehaviour.h"
 #include "Gameplay/Application.h"
 #include "Gameplay/Transform.h"
@@ -184,4 +184,4 @@ void SimpleMoveBehaviour::Update(entt::handle entity)
 		}
 	}
 }
->>>>>>> master
+ 

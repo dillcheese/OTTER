@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 #include <EnumToString.h>
@@ -127,7 +127,7 @@ constexpr GLint GetTexelComponentCount(PixelFormat format)
  */
 constexpr size_t GetTexelSize(PixelFormat format, PixelType type) {
 	return GetTexelComponentSize(type) * GetTexelComponentCount(format);
-=======
+ 
 #pragma once
 
 #include <EnumToString.h>
@@ -256,5 +256,5 @@ constexpr GLint GetTexelComponentCount(PixelFormat format)
  */
 constexpr size_t GetTexelSize(PixelFormat format, PixelType type) {
 	return GetTexelComponentSize(type) * GetTexelComponentCount(format);
->>>>>>> master
+ 
 }

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <string>
 #include <algorithm>
@@ -23,7 +23,7 @@ static inline void rtrim(std::string& s) {
 static inline void trim(std::string& s) {
 	ltrim(s);
 	rtrim(s);
-=======
+ 
 #pragma once
 #include <string>
 #include <algorithm>
@@ -48,5 +48,5 @@ static inline void rtrim(std::string& s) {
 static inline void trim(std::string& s) {
 	ltrim(s);
 	rtrim(s);
->>>>>>> master
+ 
 }

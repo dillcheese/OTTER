@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <glad/glad.h>
 #include <cstdint>
@@ -149,7 +149,7 @@ protected:
 	// The underlying OpenGL handle that this class is wrapping around
 	GLuint _handle;
 };
-=======
+ 
 #pragma once
 #include <glad/glad.h>
 #include <cstdint>
@@ -300,4 +300,4 @@ protected:
 	// The underlying OpenGL handle that this class is wrapping around
 	GLuint _handle;
 };
->>>>>>> master
+ 

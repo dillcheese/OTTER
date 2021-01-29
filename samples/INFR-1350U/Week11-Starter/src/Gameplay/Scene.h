@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #pragma once
 #include "entt.hpp"
 #include "Utilities/Macros.h"
@@ -64,7 +64,7 @@ private:
 		to.emplace_or_replace<T>(dst, from.get<T>(src));
 	}
 };
-=======
+ 
 #pragma once
 #include "entt.hpp"
 #include "Utilities/Macros.h"
@@ -130,4 +130,4 @@ private:
 		to.emplace_or_replace<T>(dst, from.get<T>(src));
 	}
 };
->>>>>>> master
+ 

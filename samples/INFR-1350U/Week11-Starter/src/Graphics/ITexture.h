@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #pragma once
 #include <cstdint>
 #include <memory>
@@ -60,7 +59,7 @@ protected:
 	static Limits _limits;
 	static bool _isStaticInit;
 };
-=======
+ 
 #pragma once
 #include <cstdint>
 #include <memory>
@@ -122,4 +121,4 @@ protected:
 	static Limits _limits;
 	static bool _isStaticInit;
 };
->>>>>>> master
+ 

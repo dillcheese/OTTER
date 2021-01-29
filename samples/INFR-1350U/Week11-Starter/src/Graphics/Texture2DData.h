@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <memory>
 #include <cstdint>
@@ -76,7 +76,7 @@ private:
 	PixelType   _type;
 	InternalFormat _recommendedFormat;
 	void* _data;
-=======
+ 
 #pragma once
 #include <memory>
 #include <cstdint>
@@ -154,5 +154,5 @@ private:
 	PixelType   _type;
 	InternalFormat _recommendedFormat;
 	void* _data;
->>>>>>> master
+ 
 };

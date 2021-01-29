@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <vector>
 #include "Graphics/VertexArrayObject.h"
@@ -117,7 +117,7 @@ protected:
 	std::vector<VertType> _vertices;
 	std::vector<uint32_t> _indices;
 };
-=======
+ 
 #pragma once
 #include <vector>
 #include "Graphics/VertexArrayObject.h"
@@ -236,4 +236,4 @@ protected:
 	std::vector<VertType> _vertices;
 	std::vector<uint32_t> _indices;
 };
->>>>>>> master
+ 

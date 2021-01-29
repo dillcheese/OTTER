@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 #include <functional>
@@ -26,7 +26,7 @@ protected:
 	int _keyCode;
 	mutable bool _isPressed;
 	std::function<void()> _onPressed;
-=======
+ 
 #pragma once
 
 #include <functional>
@@ -54,5 +54,5 @@ protected:
 	int _keyCode;
 	mutable bool _isPressed;
 	std::function<void()> _onPressed;
->>>>>>> master
+ 
 };

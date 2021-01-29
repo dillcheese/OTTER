@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 #include <memory>
@@ -13,7 +13,7 @@
 	ClassName(const ClassName& other) = delete; \
 	ClassName(ClassName&& other) = delete; \
 	ClassName& operator=(const ClassName& other) = delete; \
-=======
+ 
 #pragma once
 
 #include <memory>
@@ -28,5 +28,5 @@
 	ClassName(const ClassName& other) = delete; \
 	ClassName(ClassName&& other) = delete; \
 	ClassName& operator=(const ClassName& other) = delete; \
->>>>>>> master
+ 
 	ClassName& operator=(ClassName&& other) = delete;

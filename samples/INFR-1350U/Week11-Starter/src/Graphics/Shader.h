@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <glad/glad.h>
 #include <memory>
@@ -125,7 +125,7 @@ protected:
 
 	std::unordered_map<std::string, int> _uniformLocs;
 	
-=======
+ 
 #pragma once
 #include <glad/glad.h>
 #include <memory>
@@ -252,5 +252,5 @@ protected:
 
 	std::unordered_map<std::string, int> _uniformLocs;
 	
->>>>>>> master
+ 
 };

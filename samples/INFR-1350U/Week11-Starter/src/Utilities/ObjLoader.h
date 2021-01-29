@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "MeshFactory.h"
 
@@ -10,7 +10,7 @@ public:
 protected:
 	ObjLoader() = default;
 	~ObjLoader() = default;
-=======
+ 
 #pragma once
 #include "MeshFactory.h"
 
@@ -22,5 +22,5 @@ public:
 protected:
 	ObjLoader() = default;
 	~ObjLoader() = default;
->>>>>>> master
+ 
 };

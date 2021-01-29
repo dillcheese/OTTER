@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 
 #include <memory>
@@ -128,7 +128,7 @@ protected:
 	void __CalculateProjection();
 	// Recalculates the view matrix
 	void __CalculateView();
-=======
+ 
 #pragma once
 
 #include <memory>
@@ -258,5 +258,5 @@ protected:
 	void __CalculateProjection();
 	// Recalculates the view matrix
 	void __CalculateView();
->>>>>>> master
+ 
 };

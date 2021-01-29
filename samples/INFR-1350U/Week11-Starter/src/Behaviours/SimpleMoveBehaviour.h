@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 
@@ -12,7 +12,7 @@ public:
 
 	void Update(entt::handle entity) override;
 };
-=======
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 
@@ -26,4 +26,4 @@ public:
 
 	void Update(entt::handle entity) override;
 };
->>>>>>> master
+ 

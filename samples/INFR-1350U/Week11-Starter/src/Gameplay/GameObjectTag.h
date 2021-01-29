@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <string>
 #include <entt.hpp>
@@ -37,7 +37,7 @@ struct GameObjectTag
 	}
 
 	// TODO: we could expand this in the future for properties that all game objects should have
-=======
+ 
 #pragma once
 #include <string>
 #include <entt.hpp>
@@ -76,5 +76,5 @@ struct GameObjectTag
 	}
 
 	// TODO: we could expand this in the future for properties that all game objects should have
->>>>>>> master
+ 
 };

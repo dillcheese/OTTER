@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 #include <vector>
@@ -20,7 +20,7 @@ public:
 	
 private:
 	int _nextPointIx;
-=======
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 #include <vector>
@@ -42,5 +42,5 @@ public:
 	
 private:
 	int _nextPointIx;
->>>>>>> master
+ 
 };

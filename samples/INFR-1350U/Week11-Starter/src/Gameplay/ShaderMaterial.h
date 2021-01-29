@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include <string>
 #include "Graphics/Shader.h"
@@ -62,7 +62,7 @@ public:
 
 protected:
 };
-=======
+ 
 #pragma once
 #include <string>
 #include "Graphics/Shader.h"
@@ -126,4 +126,4 @@ public:
 
 protected:
 };
->>>>>>> master
+ 

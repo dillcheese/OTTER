@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "MeshFactory.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <GLM/gtx/euler_angles.hpp>
@@ -407,7 +407,7 @@ void MeshFactory::AddCube(MeshBuilder<VertexPosNormTexCol>& mesh, const glm::mat
 
 	#pragma endregion
 }
-=======
+ 
 #include "MeshFactory.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <GLM/gtx/euler_angles.hpp>
@@ -816,4 +816,4 @@ void MeshFactory::AddCube(MeshBuilder<VertexPosNormTexCol>& mesh, const glm::mat
 
 	#pragma endregion
 }
->>>>>>> master
+ 

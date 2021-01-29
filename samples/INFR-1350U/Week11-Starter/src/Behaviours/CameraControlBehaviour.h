@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 #include <GLM/glm.hpp>
@@ -16,7 +16,7 @@ protected:
 	bool _isPressed;
 	glm::quat _initial;
 };
-=======
+ 
 #pragma once
 #include "Gameplay/IBehaviour.h"
 #include <GLM/glm.hpp>
@@ -34,4 +34,4 @@ protected:
 	bool _isPressed;
 	glm::quat _initial;
 };
->>>>>>> master
+ 

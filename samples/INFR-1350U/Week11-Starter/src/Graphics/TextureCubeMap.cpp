@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 #include "TextureCubeMap.h"
 
 TextureCubeMap::TextureCubeMap(const TextureCubeDesc& description) :
@@ -77,7 +77,7 @@ void TextureCubeMap::SetMagFilter(MagFilter filter) {
 	if (_handle != 0) {
 		glTextureParameteri(_handle, GL_TEXTURE_MAG_FILTER, (GLenum)_description.MagnificationFilter);
 	}
-=======
+ 
 #include "TextureCubeMap.h"
 
 TextureCubeMap::TextureCubeMap(const TextureCubeDesc& description) :
@@ -156,5 +156,5 @@ void TextureCubeMap::SetMagFilter(MagFilter filter) {
 	if (_handle != 0) {
 		glTextureParameteri(_handle, GL_TEXTURE_MAG_FILTER, (GLenum)_description.MagnificationFilter);
 	}
->>>>>>> master
+ 
 }
