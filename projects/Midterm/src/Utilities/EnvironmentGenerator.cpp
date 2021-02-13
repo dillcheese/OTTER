@@ -49,7 +49,9 @@ void EnvironmentGenerator::GenerateEnvironment()
 				//Randomly places
 				temp[j].get<Transform>().SetLocalPosition(glm::vec3(Util::GetRandomNumberBetween(_spawnFromAll[i],
 					_spawnToAll[i], _avoidFromAll[i], _avoidToAll[i]), 0.0f));
-				temp[j].get<Transform>().SetLocalRotation(Util::GetRandomNumberBetween(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 360.0f)));
+				//temp[j].get<Transform>().SetLocalRotation(Util::GetRandomNumberBetween(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 360.0f)));
+				temp[j].get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
+				temp[j].get<Transform>().SetLocalScale(12.0f, 12.0f, 12.0f);
 			}
 		}
 

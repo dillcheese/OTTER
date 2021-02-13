@@ -70,6 +70,7 @@ int main() {
 		bool	option4 = false;
 		bool	option5 = true; //textures on
 		bool	option6 = false;
+		bool	option7 = false; // a + s + bloom
 
 		// These are our application / scene level uniforms that don't necessarily update
 		// every frame
@@ -88,6 +89,7 @@ int main() {
 		shader->SetUniform("u_Option4", (int)option4);
 		shader->SetUniform("u_Option5", (int)option5);
 		shader->SetUniform("u_Option6", (int)option6);
+		shader->SetUniform("u_Option7", (int)option7);
 
 		PostEffect* basicEffect;
 
@@ -145,6 +147,7 @@ int main() {
 					option3 = false;
 					option4 = false;
 					option6 = false;
+					option7 = false;
 					activeEffect = 0;
 				}
 
@@ -153,6 +156,7 @@ int main() {
 					option3 = false;
 					option4 = false;
 					option6 = false;
+					option7 = false;
 					activeEffect = 0;
 				}
 				if (ImGui::Checkbox("Specular Only", &option3)) {
@@ -160,13 +164,23 @@ int main() {
 					option2 = false;
 					option4 = false;
 					option6 = false;
+					option7 = false;
 					activeEffect = 0;
+				}
+				if (ImGui::Checkbox("Ambient + Specular + Bloom", &option7)) {
+					option1 = false;
+					option2 = false;
+					option3 = false;
+					option6 = false;
+					option4 = false;
+					activeEffect = 1;
 				}
 				if (ImGui::Checkbox("Ambient + Specular + Bloom + Cel Shading", &option4)) {
 					option1 = false;
 					option2 = false;
 					option3 = false;
 					option6 = false;
+					option7 = false;
 					activeEffect = 1;
 				}
 				if (ImGui::Checkbox("Bloom + Cell Shading", &option6)) {
@@ -174,6 +188,7 @@ int main() {
 					option2 = false;
 					option3 = false;
 					option4 = false;
+					option7 = false;
 					activeEffect = 1;
 				}
 				if (ImGui::Checkbox("Textures On", &option5)) {
@@ -226,11 +241,12 @@ int main() {
 			shader->SetUniform("u_Option3", (int)option3);
 			shader->SetUniform("u_Option4", (int)option4);
 			shader->SetUniform("u_Option6", (int)option6);
+			shader->SetUniform("u_Option7", (int)option7);
 
 			auto behaviour = BehaviourBinding::Get<SimpleMoveBehaviour>(controllables[selectedVao]);
 			ImGui::Checkbox("Relative Rotation", &behaviour->Relative);
 
-			ImGui::Text("Q/E -> Yaw\nLeft/Right -> Roll\nUp/Down -> Pitch\nY -> Toggle Mode");
+			ImGui::Text("Cosmic Cat");
 		});
 
 #pragma endregion
@@ -241,19 +257,19 @@ int main() {
 		glDepthFunc(GL_LEQUAL); // New
 
 #pragma region TEXTURE LOADING
-
 // Load some textures from files
 		Texture2D::sptr stone = Texture2D::LoadFromFile("images/Stone_001_Diffuse.png");
 		Texture2D::sptr stoneSpec = Texture2D::LoadFromFile("images/Stone_001_Specular.png");
-		Texture2D::sptr grass = Texture2D::LoadFromFile("images/grass.jpg");
+		Texture2D::sptr grass = Texture2D::LoadFromFile("images/grassy.jpg");
 		Texture2D::sptr noSpec = Texture2D::LoadFromFile("images/grassSpec.png");
-		Texture2D::sptr box = Texture2D::LoadFromFile("images/box.bmp");
-		Texture2D::sptr boxSpec = Texture2D::LoadFromFile("images/box-reflections.bmp");
-		Texture2D::sptr simpleFlora = Texture2D::LoadFromFile("images/SimpleFlora.png");
-		//LUT3D testCube("cubes/BrightenedCorrection.cube");
+
+		Texture2D::sptr wood = Texture2D::LoadFromFile("images/wodden.jpg");
+		Texture2D::sptr building = Texture2D::LoadFromFile("images/tree12.png");
+		Texture2D::sptr rock = Texture2D::LoadFromFile("images/rock1.png");
+		Texture2D::sptr tree4 = Texture2D::LoadFromFile("images/tree4.png");
+		Texture2D::sptr space = Texture2D::LoadFromFile("images/star.jpg");
 
 		// Load the cube map
-		//TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/sample.jpg");
 		TextureCubeMap::sptr environmentMap = TextureCubeMap::LoadFromImages("images/cubemaps/skybox/ToonSky.jpg");
 
 		// Creating an empty texture
@@ -264,7 +280,6 @@ int main() {
 		Texture2D::sptr texture2 = Texture2D::Create(desc);
 		// Clear it with a white colour
 		texture2->Clear();
-
 #pragma endregion
 
 		///////////////////////////////////// Scene Generation //////////////////////////////////////////////////
@@ -286,8 +301,8 @@ int main() {
 		// Create a material and set some properties for it
 		ShaderMaterial::sptr stoneMat = ShaderMaterial::Create();
 		stoneMat->Shader = shader;
-		stoneMat->Set("s_Diffuse", stone);
-		stoneMat->Set("s_Specular", stoneSpec);
+		stoneMat->Set("s_Diffuse", space);
+		stoneMat->Set("s_Specular", noSpec);
 		stoneMat->Set("u_Shininess", 2.0f);
 		stoneMat->Set("u_TextureMix", 0.0f);
 
@@ -298,51 +313,108 @@ int main() {
 		grassMat->Set("u_Shininess", 2.0f);
 		grassMat->Set("u_TextureMix", 0.0f);
 
-		ShaderMaterial::sptr boxMat = ShaderMaterial::Create();
-		boxMat->Shader = shader;
-		boxMat->Set("s_Diffuse", box);
-		boxMat->Set("s_Specular", boxSpec);
-		boxMat->Set("u_Shininess", 8.0f);
-		boxMat->Set("u_TextureMix", 0.0f);
+		ShaderMaterial::sptr woodMat = ShaderMaterial::Create();
+		woodMat->Shader = shader;
+		woodMat->Set("s_Diffuse", wood);
+		woodMat->Set("s_Specular", noSpec);
+		woodMat->Set("u_Shininess", 8.0f);
+		woodMat->Set("u_TextureMix", 0.0f);
 
-		ShaderMaterial::sptr simpleFloraMat = ShaderMaterial::Create();
-		simpleFloraMat->Shader = shader;
-		simpleFloraMat->Set("s_Diffuse", simpleFlora);
-		simpleFloraMat->Set("s_Specular", noSpec);
-		simpleFloraMat->Set("u_Shininess", 8.0f);
-		simpleFloraMat->Set("u_TextureMix", 0.0f);
+		ShaderMaterial::sptr spiderMat = ShaderMaterial::Create();
+		spiderMat->Shader = shader;
+		spiderMat->Set("s_Diffuse", building);
+		spiderMat->Set("s_Specular", noSpec);
+		spiderMat->Set("u_Shininess", 8.0f);
+		spiderMat->Set("u_TextureMix", 0.0f);
+
+		ShaderMaterial::sptr rockMat = ShaderMaterial::Create();
+		rockMat->Shader = shader;
+		rockMat->Set("s_Diffuse", rock);
+		rockMat->Set("s_Specular", rock);
+		rockMat->Set("u_Shininess", 8.0f);
+		rockMat->Set("u_TextureMix", 0.0f);
+
+		ShaderMaterial::sptr tree4Mat = ShaderMaterial::Create();
+		tree4Mat->Shader = shader;
+		tree4Mat->Set("s_Diffuse", tree4);
+		tree4Mat->Set("s_Specular", tree4);
+		tree4Mat->Set("u_Shininess", 8.0f);
+		tree4Mat->Set("u_TextureMix", 0.0f);
 
 		GameObject obj1 = scene->CreateEntity("Ground");
 		{
 			VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/plane.obj");
 			obj1.emplace<RendererComponent>().SetMesh(vao).SetMaterial(grassMat);
+			obj1.get<Transform>().SetLocalScale(2.10f, 2.10f, 2.10f);
 		}
 
-		GameObject obj2 = scene->CreateEntity("monkey_quads");
+		GameObject obj2 = scene->CreateEntity("Cat");
 		{
-			VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/monkey_quads.obj");
+			VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/cat.obj");
 			obj2.emplace<RendererComponent>().SetMesh(vao).SetMaterial(stoneMat);
-			obj2.get<Transform>().SetLocalPosition(0.0f, 0.0f, 2.0f);
-			obj2.get<Transform>().SetLocalRotation(0.0f, 0.0f, -90.0f);
+			obj2.get<Transform>().SetLocalPosition(0.0f, -6.0f, 0.0f);
+			obj2.get<Transform>().SetLocalRotation(-90.0f, 180.0f, 0.0f); //y is towards screen
+			obj2.get<Transform>().SetLocalScale(0.18f, 0.18f, 0.18f);
 			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj2);
 		}
 
-		std::vector<glm::vec2> allAvoidAreasFrom = { glm::vec2(-4.0f, -4.0f) };
-		std::vector<glm::vec2> allAvoidAreasTo = { glm::vec2(4.0f, 4.0f) };
+		//GameObject obj3 = scene->CreateEntity("Bench");
+		//{
+		//	VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/wood_bench.obj");
+		//	obj3.emplace<RendererComponent>().SetMesh(vao).SetMaterial(woodMat);
+		//	obj3.get<Transform>().SetLocalPosition(2.0f, 3.0f, 0.0f); //z height
+		//	obj3.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
+		//	obj3.get<Transform>().SetLocalScale(0.0020f, 0.0020f, 0.0020f);
+		//	BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj3);
+		//}
 
-		std::vector<glm::vec2> rockAvoidAreasFrom = { glm::vec2(-3.0f, -3.0f), glm::vec2(-19.0f, -19.0f), glm::vec2(5.0f, -19.0f),
+		GameObject obj4 = scene->CreateEntity("tree");
+		{
+			VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/tree 12.obj");
+			obj4.emplace<RendererComponent>().SetMesh(vao).SetMaterial(spiderMat);
+			obj4.get<Transform>().SetLocalPosition(-84.0f, 0.0f, 0.0f); //z height
+			obj4.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
+			obj4.get<Transform>().SetLocalScale(8.0f, 8.0f, 8.0f);
+			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj4);
+		}
+
+		GameObject obj5 = scene->CreateEntity("rock");
+		{
+			VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/rock1.obj");
+			obj5.emplace<RendererComponent>().SetMesh(vao).SetMaterial(rockMat);
+			obj5.get<Transform>().SetLocalPosition(-30.0f, -6.0f, 0.0f); //z height
+			obj5.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
+			obj5.get<Transform>().SetLocalScale(2.00f, 2.0f, 2.0f);
+			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj5);
+		}
+
+		//GameObject obj6 = scene->CreateEntity("tree 4");
+		//{
+		//	VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/tree4.obj");
+		//	obj6.emplace<RendererComponent>().SetMesh(vao).SetMaterial(tree4Mat);
+		//	obj6.get<Transform>().SetLocalPosition(-6.0f, 6.0f, 0.0f); //z height
+		//	obj6.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
+		//	obj6.get<Transform>().SetLocalScale(15.00f, 15.0f, 15.0f);
+		//	BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj6);
+		//}
+
+		std::vector<glm::vec2> allAvoidAreasFrom = { glm::vec2(-10.0f, -10.0f) };
+		std::vector<glm::vec2> allAvoidAreasTo = { glm::vec2(10.0f, 10.0f) };
+
+		std::vector<glm::vec2> rockAvoidAreasFrom = { glm::vec2(-4.0f, -4.0f), glm::vec2(-19.0f, -19.0f), glm::vec2(5.0f, -19.0f),
 														glm::vec2(-19.0f, 5.0f), glm::vec2(-19.0f, -19.0f) };
-		std::vector<glm::vec2> rockAvoidAreasTo = { glm::vec2(3.0f, 3.0f), glm::vec2(19.0f, -5.0f), glm::vec2(19.0f, 19.0f),
+		std::vector<glm::vec2> rockAvoidAreasTo = { glm::vec2(6.0f, 6.0f), glm::vec2(19.0f, -5.0f), glm::vec2(19.0f, 19.0f),
 														glm::vec2(19.0f, 19.0f), glm::vec2(-5.0f, 19.0f) };
-		glm::vec2 spawnFromHere = glm::vec2(-19.0f, -19.0f);
-		glm::vec2 spawnToHere = glm::vec2(19.0f, 19.0f);
+		glm::vec2 spawnFromHere = glm::vec2(-40.0f, -40.0f);
+		glm::vec2 spawnToHere = glm::vec2(40.0f, 40.0f);
 
-		EnvironmentGenerator::AddObjectToGeneration("models/simplePine.obj", simpleFloraMat, 150,
+		EnvironmentGenerator::AddObjectToGeneration("models/tree4.obj", tree4Mat, 130,
 			spawnFromHere, spawnToHere, allAvoidAreasFrom, allAvoidAreasTo);
-		EnvironmentGenerator::AddObjectToGeneration("models/simpleTree.obj", simpleFloraMat, 150,
-			spawnFromHere, spawnToHere, allAvoidAreasFrom, allAvoidAreasTo);
-		EnvironmentGenerator::AddObjectToGeneration("models/simpleRock.obj", simpleFloraMat, 40,
-			spawnFromHere, spawnToHere, rockAvoidAreasFrom, rockAvoidAreasTo);
+
+		//EnvironmentGenerator::AddObjectToGeneration("models/simpleTree.obj", simpleFloraMat, 150,
+		//	spawnFromHere, spawnToHere, allAvoidAreasFrom, allAvoidAreasTo);
+		/*EnvironmentGenerator::AddObjectToGeneration("models/simpleRock.obj", simpleFloraMat, 40,
+			spawnFromHere, spawnToHere, rockAvoidAreasFrom, rockAvoidAreasTo);*/
 		EnvironmentGenerator::GenerateEnvironment();
 
 		// Create an object to be our camera

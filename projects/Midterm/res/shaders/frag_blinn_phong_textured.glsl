@@ -11,6 +11,7 @@ uniform bool u_Option3;
 uniform bool u_Option4;// a + s + bloom + toon shade
 uniform int u_Option5;	//no textures
 uniform bool u_Option6;	//bloom + cell + stnadard lighting
+uniform bool u_Option7;	//// a + s + bloom
 
 uniform sampler2D s_Diffuse;
 uniform sampler2D s_Diffuse2;
@@ -110,6 +111,13 @@ void main() {
 	
 	}
 
+	else if (u_Option7 == true){//a + s + bloom
+
+	vec3 result = (ambient+specular);
+	result = mix(result * inColor, result * inColor * textureColor.rgb, u_Option5);
+	frag_color = vec4(result, textureColor.a);
+	
+	}
 
 	else {
 	vec3 result = (

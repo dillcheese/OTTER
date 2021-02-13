@@ -10,7 +10,7 @@ public:
 	void Update(entt::handle entity) override;
 
 protected:
-	float _moveSpeed = 1.5f;
+	float _moveSpeed = 3.5f;
 	double _prevMouseX, _prevMouseY;
 	float _rotationX, _rotationY;
 	bool _isPressed;
