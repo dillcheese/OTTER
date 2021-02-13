@@ -16,7 +16,7 @@ public:
 	//Getters
 	float GetIntensity() const;
 	float GetThreshold() const;
-	unsigned GetAmount() const;
+	int GetAmount() const;
 
 	//Setters
 	void SetIntensity(float intensity);

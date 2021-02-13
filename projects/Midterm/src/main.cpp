@@ -162,14 +162,14 @@ int main() {
 					option6 = false;
 					activeEffect = 0;
 				}
-				if (ImGui::Checkbox("Ambient + Specular + Bloom + Cel Shade", &option4)) {
+				if (ImGui::Checkbox("Ambient + Specular + Bloom + Cel Shading", &option4)) {
 					option1 = false;
 					option2 = false;
 					option3 = false;
 					option6 = false;
 					activeEffect = 1;
 				}
-				if (ImGui::Checkbox("Bloom + Cell Shade", &option6)) {
+				if (ImGui::Checkbox("Bloom + Cell Shading", &option6)) {
 					option1 = false;
 					option2 = false;
 					option3 = false;

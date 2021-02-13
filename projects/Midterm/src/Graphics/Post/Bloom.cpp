@@ -93,7 +93,7 @@ void Bloom::ApplyEffect(PostEffect* buffer)
 	//combine the blur and scene to create bloom effect
 	BindShader(3);
 	
-	_shaders[3]->SetUniform("u_Intensity", m_intensity);
+	_shaders[3]->SetUniform("u_Intensity", m_intensity);//exposure
 
 	buffer->BindColorAsTexture(0, 0, 0);
 	BindColorAsTexture(1, 0, 1);
@@ -115,7 +115,7 @@ float Bloom::GetThreshold() const
 	return m_threshold;
 }
 
-unsigned Bloom::GetAmount() const
+int Bloom::GetAmount() const
 {
 	return m_amount;
 }
