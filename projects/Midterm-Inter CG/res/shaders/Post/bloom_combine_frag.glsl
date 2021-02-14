@@ -1,7 +1,7 @@
 #version 420
 
 layout(binding = 0) uniform sampler2D u_Scene;//no bloom
-layout(binding = 1) uniform sampler2D u_Bloom;//bloom
+layout(binding = 1) uniform sampler2D u_Bloom;//blur
 
 layout(location = 0) in vec2 inUV;
 

@@ -38,8 +38,8 @@ void main()
             result += texture(s_screenTex, inUV - vec2(0.0, TexelSize.y * i)).rgb * weight[i];
         }
     }
-    frag_color = vec4(result, 1.0);
 
+    frag_color = vec4(result, 1.0);
 
 
 }
