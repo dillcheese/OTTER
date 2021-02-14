@@ -6,12 +6,13 @@ layout(binding = 1) uniform sampler2D u_Bloom;//bloom
 layout(location = 0) in vec2 inUV;
 
 uniform float u_Intensity;
+uniform float u_Gamma;
 
 out vec4 frag_color;
 //CODE FORM: https://learnopengl.com/Advanced-Lighting/Bloom
 void main() 
 {
-    const float gamma = 2.5;
+   // const float gamma = 2.5;
 
 	vec3 hdrColor = texture(u_Scene, inUV).rgb;      
     vec3 bloomColor = texture(u_Bloom, inUV).rgb;
@@ -26,8 +27,9 @@ void main()
     vec3 result = vec3(1.0) - exp(-hdrColor *u_Intensity); //exposure
     //vec3 result = vec3(1.0) - exp(-hdrColor);
 
-    // also gamma correct       
-    result = pow(result, vec3(1.0 / gamma));
+    // gamma correct       
+    result = pow(result, vec3(1.0 / u_Gamma));
+
     frag_color = vec4(result,1.0);
 
 }

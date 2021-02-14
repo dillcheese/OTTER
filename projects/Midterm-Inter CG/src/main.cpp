@@ -96,8 +96,6 @@ int main() {
 		int activeEffect = 0;
 		std::vector<PostEffect*> effects;
 
-		//SepiaEffect* sepiaEffect;
-		//GreyscaleEffect* greyscaleEffect;
 		Bloom* BloomEffect;
 
 		int bands = 2;
@@ -114,7 +112,9 @@ int main() {
 					Bloom* temp = (Bloom*)effects[activeEffect];
 					float intensity = temp->GetIntensity();
 					float threshold = temp->GetThreshold();
-					float amount = temp->GetAmount();
+					int amount = temp->GetAmount();
+					float blur = temp->GetBlur();
+					float gamma = temp->GetGamma();
 
 					if (ImGui::SliderFloat("Exposure", &intensity, 0.10f, 2.0f))
 					{
@@ -125,9 +125,17 @@ int main() {
 					{
 						temp->SetThreshold(threshold);
 					}
-					if (ImGui::SliderFloat("Blur Amounts", &amount, 1, 20))
+					if (ImGui::SliderInt("Blur Amounts", &amount, 1, 20))
 					{
 						temp->SetAmount(amount);
+					}
+					if (ImGui::SliderFloat("Blur Weights", &blur, 0.001f, 0.1f))
+					{
+						temp->SetBlur(blur);
+					}
+					if (ImGui::SliderFloat("Gamma", &gamma, 1.0f, 5.0f))
+					{
+						temp->SetGamma(gamma);
 					}
 				}
 
@@ -235,7 +243,6 @@ int main() {
 					}
 				}
 			}
-			
 			shader->SetUniform("u_Option1", (int)option1);
 			shader->SetUniform("u_Option2", (int)option2);
 			shader->SetUniform("u_Option3", (int)option3);
@@ -243,14 +250,13 @@ int main() {
 			shader->SetUniform("u_Option6", (int)option6);
 			shader->SetUniform("u_Option7", (int)option7);
 
-			auto behaviour = BehaviourBinding::Get<SimpleMoveBehaviour>(controllables[selectedVao]);
-			ImGui::Checkbox("Relative Rotation", &behaviour->Relative);
+			/*auto behaviour = BehaviourBinding::Get<SimpleMoveBehaviour>(controllables[selectedVao]);
+			ImGui::Checkbox("Relative Rotation", &behaviour->Relative);*/
 
 			ImGui::Text("Cosmic Cat");
 		});
 
 #pragma endregion
-
 		// GL states
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
@@ -258,11 +264,9 @@ int main() {
 
 #pragma region TEXTURE LOADING
 // Load some textures from files
-		Texture2D::sptr stone = Texture2D::LoadFromFile("images/Stone_001_Diffuse.png");
-		Texture2D::sptr stoneSpec = Texture2D::LoadFromFile("images/Stone_001_Specular.png");
+
 		Texture2D::sptr grass = Texture2D::LoadFromFile("images/grassy.jpg");
 		Texture2D::sptr noSpec = Texture2D::LoadFromFile("images/grassSpec.png");
-
 		Texture2D::sptr wood = Texture2D::LoadFromFile("images/wodden.jpg");
 		Texture2D::sptr building = Texture2D::LoadFromFile("images/tree12.png");
 		Texture2D::sptr rock = Texture2D::LoadFromFile("images/rock1.png");
@@ -355,18 +359,13 @@ int main() {
 			obj2.get<Transform>().SetLocalPosition(0.0f, -6.0f, 0.0f);
 			obj2.get<Transform>().SetLocalRotation(-90.0f, 180.0f, 0.0f); //y is towards screen
 			obj2.get<Transform>().SetLocalScale(0.18f, 0.18f, 0.18f);
-			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj2);
+			//BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj2);
+			auto pathing = BehaviourBinding::Bind<FollowPathBehaviour>(obj2);
+			// Set up a path for the object to follow
+			pathing->Points.push_back({ 0.0f, -7.0f, 0.0f });
+			pathing->Points.push_back({ 0.0f, -8.0f, 0.0f });
+			pathing->Speed = 0.5f;
 		}
-
-		//GameObject obj3 = scene->CreateEntity("Bench");
-		//{
-		//	VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/wood_bench.obj");
-		//	obj3.emplace<RendererComponent>().SetMesh(vao).SetMaterial(woodMat);
-		//	obj3.get<Transform>().SetLocalPosition(2.0f, 3.0f, 0.0f); //z height
-		//	obj3.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
-		//	obj3.get<Transform>().SetLocalScale(0.0020f, 0.0020f, 0.0020f);
-		//	BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj3);
-		//}
 
 		GameObject obj4 = scene->CreateEntity("tree");
 		{
@@ -385,36 +384,23 @@ int main() {
 			obj5.get<Transform>().SetLocalPosition(-30.0f, -6.0f, 0.0f); //z height
 			obj5.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
 			obj5.get<Transform>().SetLocalScale(2.00f, 2.0f, 2.0f);
-			BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj5);
+			//BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj5);
+			auto pathing = BehaviourBinding::Bind<FollowPathBehaviour>(obj5);
+			// Set up a path for the object to follow
+			pathing->Points.push_back({ -30.0f, -6.0f, 0.10f });
+			pathing->Points.push_back({ -30.0f, -6.0f, 3.0f });
+			pathing->Speed = 1.0f;
 		}
-
-		//GameObject obj6 = scene->CreateEntity("tree 4");
-		//{
-		//	VertexArrayObject::sptr vao = ObjLoader::LoadFromFile("models/tree4.obj");
-		//	obj6.emplace<RendererComponent>().SetMesh(vao).SetMaterial(tree4Mat);
-		//	obj6.get<Transform>().SetLocalPosition(-6.0f, 6.0f, 0.0f); //z height
-		//	obj6.get<Transform>().SetLocalRotation(90.0f, 0.0f, 0.0f);
-		//	obj6.get<Transform>().SetLocalScale(15.00f, 15.0f, 15.0f);
-		//	BehaviourBinding::BindDisabled<SimpleMoveBehaviour>(obj6);
-		//}
 
 		std::vector<glm::vec2> allAvoidAreasFrom = { glm::vec2(-10.0f, -10.0f) };
 		std::vector<glm::vec2> allAvoidAreasTo = { glm::vec2(10.0f, 10.0f) };
 
-		std::vector<glm::vec2> rockAvoidAreasFrom = { glm::vec2(-4.0f, -4.0f), glm::vec2(-19.0f, -19.0f), glm::vec2(5.0f, -19.0f),
-														glm::vec2(-19.0f, 5.0f), glm::vec2(-19.0f, -19.0f) };
-		std::vector<glm::vec2> rockAvoidAreasTo = { glm::vec2(6.0f, 6.0f), glm::vec2(19.0f, -5.0f), glm::vec2(19.0f, 19.0f),
-														glm::vec2(19.0f, 19.0f), glm::vec2(-5.0f, 19.0f) };
 		glm::vec2 spawnFromHere = glm::vec2(-40.0f, -40.0f);
 		glm::vec2 spawnToHere = glm::vec2(40.0f, 40.0f);
 
-		EnvironmentGenerator::AddObjectToGeneration("models/tree4.obj", tree4Mat, 130,
+		EnvironmentGenerator::AddObjectToGeneration("models/tree4.obj", tree4Mat, 135,
 			spawnFromHere, spawnToHere, allAvoidAreasFrom, allAvoidAreasTo);
 
-		//EnvironmentGenerator::AddObjectToGeneration("models/simpleTree.obj", simpleFloraMat, 150,
-		//	spawnFromHere, spawnToHere, allAvoidAreasFrom, allAvoidAreasTo);
-		/*EnvironmentGenerator::AddObjectToGeneration("models/simpleRock.obj", simpleFloraMat, 40,
-			spawnFromHere, spawnToHere, rockAvoidAreasFrom, rockAvoidAreasTo);*/
 		EnvironmentGenerator::GenerateEnvironment();
 
 		// Create an object to be our camera
@@ -448,7 +434,6 @@ int main() {
 			BloomEffect->Init(width, height);
 		}
 		effects.push_back(BloomEffect);
-
 
 #pragma endregion
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -552,8 +537,7 @@ int main() {
 
 			// Clear the screen
 			basicEffect->Clear();
-			/*greyscaleEffect->Clear();
-			sepiaEffect->Clear();*/
+
 			for (int i = 0; i < effects.size(); i++)
 			{
 				effects[i]->Clear();

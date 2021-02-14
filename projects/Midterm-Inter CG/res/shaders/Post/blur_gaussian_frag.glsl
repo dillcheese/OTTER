@@ -9,12 +9,15 @@ uniform float u_Blur;
 
 uniform bool u_Horizontal;
 
-uniform float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+//uniform float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+uniform float weight[5];
 
 //CODE FROM: https://learnopengl.com/Advanced-Lighting/Bloom
 void main() 
 {
 	vec2 TexelSize = 1.0 / textureSize(s_screenTex, 0); // gets size of single texel
+
+    float weight[5] = float[] (0.227027, 0.1945946+(u_Blur/2.f), 0.1216216+(u_Blur/2.f), 0.054054+(u_Blur/2.f), 0.016216+(u_Blur/2.f));
 
     vec3 result = texture(s_screenTex, inUV).rgb * weight[0]; // current fragment's contribution
 

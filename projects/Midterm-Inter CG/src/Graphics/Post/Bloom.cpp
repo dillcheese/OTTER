@@ -23,7 +23,7 @@ void Bloom::Init(unsigned width, unsigned height)
 	int indexS = int(_shaders.size());
 	_shaders.push_back(Shader::Create());
 	_shaders[indexS]->LoadShaderPartFromFile("shaders/passthrough_vert.glsl", GL_VERTEX_SHADER);
-	_shaders[indexS]->LoadShaderPartFromFile("shaders/passthrough_frag.glsl", GL_FRAGMENT_SHADER);
+	_shaders[indexS]->LoadShaderPartFromFile("shaders/passthrough_frag.glsl", GL_FRAGMENT_SHADER);//gives an image
 	_shaders[indexS]->Link();
 	indexS++;
 	_shaders.push_back(Shader::Create());
@@ -55,7 +55,7 @@ void Bloom::ApplyEffect(PostEffect* buffer)
 
 	UnbindShader();
 
-	//Get birght colors on the first render target
+	//Get bright colors on the first render target
 	BindShader(1);
 	_shaders[1]->SetUniform("u_Threshold", m_threshold);
 
@@ -71,7 +71,7 @@ void Bloom::ApplyEffect(PostEffect* buffer)
 		//Horizontal pass
 		BindShader(2);
 		_shaders[2]->SetUniform("u_Horizontal", (int)true);
-		//_shaders[2]->SetUniform("u_Blur", m_intensity);
+		_shaders[2]->SetUniform("u_Blur", m_blur);
 
 		BindColorAsTexture(1, 0, 0);
 		
@@ -94,6 +94,7 @@ void Bloom::ApplyEffect(PostEffect* buffer)
 	BindShader(3);
 	
 	_shaders[3]->SetUniform("u_Intensity", m_intensity);//exposure
+	_shaders[3]->SetUniform("u_Gamma", m_gamma);//gamma
 
 	buffer->BindColorAsTexture(0, 0, 0);
 	BindColorAsTexture(1, 0, 1);
@@ -120,6 +121,16 @@ int Bloom::GetAmount() const
 	return m_amount;
 }
 
+float Bloom::GetBlur() const
+{
+	return m_blur;
+}
+
+float Bloom::GetGamma() const
+{
+	return m_gamma;
+}
+
 void Bloom::SetIntensity(float intensity)
 {
 	m_intensity = intensity;
@@ -130,7 +141,17 @@ void Bloom::SetThreshold(float threshold)
 	m_threshold = threshold;
 }
 
-void Bloom::SetAmount(unsigned amount)
+void Bloom::SetAmount(int amount)
 {
 	m_amount = amount;
+}
+
+void Bloom::SetBlur(float blur)
+{
+	m_blur = blur;
+}
+
+void Bloom::SetGamma(float gamma)
+{
+	m_gamma = gamma;
 }
